@@ -33,7 +33,7 @@ public class Breakout extends JFrame
 
 		setTitle("Brick Breaker - Breakout");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(Commons.WIDTH, Commons.HEIGTH);
+		setSize(Commons.WIDTH, Commons.HEIGHT);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
