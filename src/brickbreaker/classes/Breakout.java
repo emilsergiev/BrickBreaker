@@ -28,28 +28,25 @@ public class Breakout extends JFrame
 	protected Breakout()
 	{
 		initGUI();
-		setMenuBarOptions();
+		setMenuBar();
 		createEvents();
 	}
 
 	private void initGUI()
 	{
-		
-
-		setTitle("Brick Breaker - Breakout");
+		setTitle("Wall Breaker - Breakout");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(Commons.WIDTH, Commons.HEIGHT);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
-
 		add(board);
 	}
 
-	private void setMenuBarOptions()
+	private void setMenuBar()
 	{
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource
-				("/brickbreaker/resources/spider.png")));
+				("/brickbreaker/resources/wall.png")));
 
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menuGame = new JMenu("Game");
@@ -95,7 +92,7 @@ public class Breakout extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				board.setPlay(true);
+				board.playGame();
 			}
 		});
 
@@ -104,7 +101,7 @@ public class Breakout extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				//TODO pause game call...
+				board.pause();
 			}
 		});
 
