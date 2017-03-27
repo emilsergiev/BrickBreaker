@@ -3,8 +3,9 @@ package brickbreaker.classes;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.net.URL;
+import javax.swing.ImageIcon;
 
-public class GameObject
+abstract class GameObject
 {
 	protected int x;
 	protected int y;
@@ -53,14 +54,19 @@ public class GameObject
 		return height;
 	}
 
-	protected Image getImage()
-	{
-		return image;
-	}
-
 	protected Rectangle getRect()
 	{
 		return new Rectangle(x, y, width, height);
+	}
+
+	protected Rectangle getLeft()
+	{
+		return new Rectangle(x - 1, y, 1, height);
+	}
+
+	protected Rectangle getRight()
+	{
+		return new Rectangle(x + width + 1, y, 1, height);
 	}
 
 	protected boolean isDestroyed()
@@ -71,6 +77,19 @@ public class GameObject
 	protected void setDestroyed(boolean destroyed)
 	{
 		this.destroyed = destroyed;
+	}
+
+	protected Image getImage()
+	{
+		return image;
+	}
+
+	protected void setImage(String img)
+	{
+		ImageIcon ii = new ImageIcon(getURL(img));
+		image = ii.getImage();
+		width = image.getWidth(null);
+		height = image.getHeight(null);
 	}
 
 	protected URL getURL(String filename)
