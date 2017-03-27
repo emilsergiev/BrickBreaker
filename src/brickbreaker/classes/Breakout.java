@@ -62,7 +62,7 @@ public class Breakout extends JFrame
 		menuItemAbout = new JMenuItem("About");
 		btnSound = new JRadioButtonMenuItem("Sound ON");
 		btnMute = new JRadioButtonMenuItem("Sound OFF");
-		
+
 		buttonGroup.add(btnSound);
 		buttonGroup.add(btnMute);
 		btnSound.setSelected(true);
@@ -110,7 +110,7 @@ public class Breakout extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				//TODO resume paused game call...
+				board.resume();
 			}
 		});
 
@@ -138,6 +138,33 @@ public class Breakout extends JFrame
 			public void actionPerformed(ActionEvent e)
 			{
 				//TODO ask for confirmation before exiting...
+			}
+		});
+
+		menuItemAbout.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				//TODO the about window...
+			}
+		});
+
+		btnSound.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				//TODO turn ON sound...
+			}
+		});
+
+		btnMute.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				//TODO turn OFF sound...
 			}
 		});
 	}
