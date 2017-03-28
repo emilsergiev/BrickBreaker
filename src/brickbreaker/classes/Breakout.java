@@ -25,7 +25,7 @@ public class Breakout extends JFrame
 	private JRadioButtonMenuItem btnMute;
 	private Board board = new Board();
 
-	protected Breakout()
+	Breakout()
 	{
 		initGUI();
 		setMenuBar();
@@ -146,7 +146,9 @@ public class Breakout extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				//TODO the about window...
+				About about = new About();
+				about.setModal(true);
+				about.setVisible(true);
 			}
 		});
 
