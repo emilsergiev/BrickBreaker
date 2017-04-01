@@ -2,11 +2,11 @@ package brickbreaker.classes;
 
 import java.util.TimerTask;
 
-public class Animate extends TimerTask
+class Animate extends TimerTask
 {
 	Board gameBoard;
 
-	protected Animate(Board board)
+	Animate(Board board)
 	{
 		super();
 		gameBoard = board;
