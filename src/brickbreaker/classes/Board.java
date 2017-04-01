@@ -13,12 +13,13 @@ import java.util.Random;
 import java.util.Timer;
 import javax.swing.JPanel;
 
-public class Board extends JPanel implements Commons
+class Board extends JPanel implements Commons
 {
 	private static final long serialVersionUID = 1L;
 	private int ingame = 1;
 	private int level = 1;
 	private int score = 0;
+	private int highScore;
 	private boolean play;
 	private boolean paused;
 	private Timer timer;
@@ -27,21 +28,21 @@ public class Board extends JPanel implements Commons
 	private ArrayList<Ball> balls = new ArrayList<Ball>();
 	private ArrayList<Brick> bricks = new ArrayList<Brick>();
 	private ArrayList<Spider> spiders = new ArrayList<Spider>();
-	private String message = "<ENTER> to play";
+	private String message = "Press <ENTER> to play";
 	private FreeGift gift;
 
-	protected Board()
+	Board()
 	{
-		setBricks();
 		setFocusable(true);
 		setDoubleBuffered(true);
 		addKeyListener(new MyAdapter());
 	}
 
-	protected void playGame()
+	void playGame()
 	{
 		if (!play)
 		{
+			setBricks();
 			timer = new Timer();
 			timer.scheduleAtFixedRate(new Animate(this), DELAY, PERIOD);
 			paddle = new Paddle();
@@ -50,7 +51,7 @@ public class Board extends JPanel implements Commons
 		}
 	}
 
-	private void setBricks()
+	void setBricks()
 	{
 		for (int i = 0; i < 8; i++)
 		{
@@ -154,7 +155,7 @@ public class Board extends JPanel implements Commons
 		}
 	}
 
-	protected void update()
+	void update()
 	{
 		if (ingame <= 0)
 		{
@@ -346,7 +347,7 @@ public class Board extends JPanel implements Commons
 		}
 	}
 
-	protected void pause()
+	void pause()
 	{
 		if (play)
 		{
@@ -355,7 +356,7 @@ public class Board extends JPanel implements Commons
 		}
 	}
 
-	protected void resume()
+	void resume()
 	{
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new Animate(this), DELAY, PERIOD);
@@ -364,8 +365,15 @@ public class Board extends JPanel implements Commons
 
 	private void endGame()
 	{
+		highScore = score;
+		score = 0;
+		level = 1;
+		ingame = 1;
+		balls.clear();
+		bricks.clear();
+		spiders.clear();
 		play = false;
-		message = "Game Over!";
+		message = "Game Over! score: " + highScore;
 		timer.cancel();
 		timer.purge();
 	}
