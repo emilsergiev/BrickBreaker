@@ -7,84 +7,84 @@ import javax.swing.ImageIcon;
 
 abstract class GameObject
 {
-	protected int x;
-	protected int y;
-	protected int width;
-	protected int height;
-	protected Image image;
-	protected boolean destroyed;
+	int x;
+	int y;
+	int width;
+	int height;
+	Image image;
+	boolean destroyed;
 
-	protected void setX(int x)
+	GameObject()
+	{
+		destroyed = false;
+	}
+
+	void setX(int x)
 	{
 		this.x = x;
 	}
 
-	protected int getX()
+	int getX()
 	{
 		return x;
 	}
 
-	protected void setY(int y)
+	void setY(int y)
 	{
 		this.y = y;
 	}
 
-	protected int getY()
+	int getY()
 	{
 		return y;
 	}
 
-	protected void setWidth(int width)
+	void setWidth(int width)
 	{
 		this.width = width;
 	}
 
-	protected int getWidth()
+	int getWidth()
 	{
 		return width;
 	}
 
-	protected void setHeight(int height)
+	void setHeight(int height)
 	{
 		this.height = height;
 	}
 
-	protected int getHeight()
+	int getHeight()
 	{
 		return height;
 	}
 
-	protected Rectangle getRect()
+	Rectangle getRect()
 	{
 		return new Rectangle(x, y, width, height);
 	}
 
-	protected Rectangle getLeft()
+	Rectangle getLeft()
 	{
 		return new Rectangle(x - 1, y, 1, height);
 	}
 
-	protected Rectangle getRight()
+	Rectangle getRight()
 	{
 		return new Rectangle(x + width + 1, y, 1, height);
 	}
 
-	protected boolean isDestroyed()
+	boolean isDestroyed()
 	{
 		return destroyed;
 	}
 
-	protected void setDestroyed(boolean destroyed)
+	void setDestroyed(boolean destroyed)
 	{
 		this.destroyed = destroyed;
 	}
 
-	protected Image getImage()
-	{
-		return image;
-	}
-
-	protected void setImage(String img)
+	void setImage(String img)
 	{
 		ImageIcon ii = new ImageIcon(getURL(img));
 		image = ii.getImage();
@@ -92,7 +92,7 @@ abstract class GameObject
 		height = image.getHeight(null);
 	}
 
-	protected URL getURL(String filename)
+	URL getURL(String filename)
 	{
 		URL url = null;
 		try { url = this.getClass().getResource(filename); }
