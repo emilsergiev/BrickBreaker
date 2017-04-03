@@ -25,31 +25,28 @@ public class Breakout extends JFrame
 	private JRadioButtonMenuItem btnMute;
 	private Board board = new Board();
 
-	protected Breakout()
+	Breakout()
 	{
 		initGUI();
-		setMenuBarOptions();
+		setMenuBar();
 		createEvents();
 	}
 
 	private void initGUI()
 	{
-		
-
-		setTitle("Brick Breaker - Breakout");
+		setTitle("Wall Breaker - Breakout");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(Commons.WIDTH, Commons.HEIGHT);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
-
 		add(board);
 	}
 
-	private void setMenuBarOptions()
+	private void setMenuBar()
 	{
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource
-				("/brickbreaker/resources/spider.png")));
+				("/brickbreaker/resources/wall.png")));
 
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menuGame = new JMenu("Game");
@@ -65,7 +62,7 @@ public class Breakout extends JFrame
 		menuItemAbout = new JMenuItem("About");
 		btnSound = new JRadioButtonMenuItem("Sound ON");
 		btnMute = new JRadioButtonMenuItem("Sound OFF");
-		
+
 		buttonGroup.add(btnSound);
 		buttonGroup.add(btnMute);
 		btnSound.setSelected(true);
@@ -95,7 +92,7 @@ public class Breakout extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				board.setPlay(true);
+				board.playGame();
 			}
 		});
 
@@ -104,7 +101,7 @@ public class Breakout extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				//TODO pause game call...
+				board.pause();
 			}
 		});
 
@@ -113,7 +110,7 @@ public class Breakout extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				//TODO resume paused game call...
+				board.resume();
 			}
 		});
 
@@ -141,6 +138,35 @@ public class Breakout extends JFrame
 			public void actionPerformed(ActionEvent e)
 			{
 				//TODO ask for confirmation before exiting...
+			}
+		});
+
+		menuItemAbout.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				About about = new About();
+				about.setModal(true);
+				about.setVisible(true);
+			}
+		});
+
+		btnSound.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				//TODO turn ON sound...
+			}
+		});
+
+		btnMute.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				//TODO turn OFF sound...
 			}
 		});
 	}

@@ -3,77 +3,104 @@ package brickbreaker.classes;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.net.URL;
+import javax.swing.ImageIcon;
 
-public class GameObject
+abstract class GameObject
 {
-	protected int x;
-	protected int y;
-	protected int width;
-	protected int height;
-	protected Image image;
-	protected boolean destroyed;
+	int x;
+	int y;
+	int width;
+	int height;
+	Image image;
+	boolean destroyed;
 
-	protected void setX(int x)
+	GameObject()
+	{
+		destroyed = false;
+	}
+
+	void setX(int x)
 	{
 		this.x = x;
 	}
 
+<<<<<<< HEAD
 	public int getX()
+=======
+	int getX()
+>>>>>>> 03251e484697a91a9fb5d05b7c6e99f1bc3e3a55
 	{
 		return x;
 	}
 
-	protected void setY(int y)
+	void setY(int y)
 	{
 		this.y = y;
 	}
 
+<<<<<<< HEAD
 	public int getY()
+=======
+	int getY()
+>>>>>>> 03251e484697a91a9fb5d05b7c6e99f1bc3e3a55
 	{
 		return y;
 	}
 
-	protected void setWidth(int width)
+	void setWidth(int width)
 	{
 		this.width = width;
 	}
 
-	protected int getWidth()
+	int getWidth()
 	{
 		return width;
 	}
 
-	protected void setHeight(int height)
+	void setHeight(int height)
 	{
 		this.height = height;
 	}
 
-	protected int getHeight()
+	int getHeight()
 	{
 		return height;
 	}
 
-	protected Image getImage()
-	{
-		return image;
-	}
-
-	protected Rectangle getRect()
+	Rectangle getRect()
 	{
 		return new Rectangle(x, y, width, height);
 	}
 
-	protected boolean isDestroyed()
+	Rectangle getLeft()
+	{
+		return new Rectangle(x - 1, y, 1, height);
+	}
+
+	Rectangle getRight()
+	{
+		return new Rectangle(x + width + 1, y, 1, height);
+	}
+
+	boolean isDestroyed()
 	{
 		return destroyed;
 	}
 
-	protected void setDestroyed(boolean destroyed)
+	void setDestroyed(boolean destroyed)
 	{
 		this.destroyed = destroyed;
 	}
 
-	protected URL getURL(String filename)
+	void setImage(String img)
+	{
+		ImageIcon ii = new ImageIcon(getURL(img));
+		image = ii.getImage();
+		width = image.getWidth(null);
+		height = image.getHeight(null);
+	}
+
+	URL getURL(String filename)
 	{
 		URL url = null;
 		try { url = this.getClass().getResource(filename); }
