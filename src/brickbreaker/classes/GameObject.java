@@ -18,7 +18,7 @@ public class GameObject
 		this.x = x;
 	}
 
-	protected int getX()
+	public int getX()
 	{
 		return x;
 	}
@@ -28,7 +28,7 @@ public class GameObject
 		this.y = y;
 	}
 
-	protected int getY()
+	public int getY()
 	{
 		return y;
 	}
