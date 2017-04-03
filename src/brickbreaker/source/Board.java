@@ -234,7 +234,7 @@ class Board extends JPanel implements Commons
 			if (spider.getRect().intersects(paddle.getRect()) && !spider.isDestroyed())
 			{
 				spider.setDestroyed(true);
-				if (spider.isExtra())
+				if (spider.isExtraBall())
 				{
 					Sound.BOING.play();
 					balls.add(new Ball(spider.getX(), spider.getY()));
