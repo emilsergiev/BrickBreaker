@@ -1,11 +1,9 @@
 package brickbreaker.source;
 
-class Spider extends GameObject implements Commons
-{
+class Spider extends GameObject implements Commons {
 	private boolean extraBall;
 
-	Spider(int x, int y, boolean extra)
-	{
+	Spider(int x, int y, boolean extra) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -13,19 +11,16 @@ class Spider extends GameObject implements Commons
 		setExtraBall(extra);
 	}
 
-	boolean isExtraBall()
-	{
+	boolean isExtraBall() {
 		return extraBall;
 	}
 
-	void setExtraBall(boolean extra)
-	{
+	void setExtraBall(boolean extra) {
 		extraBall = extra;
 	}
 
 	@Override
-	public void move()
-	{
+	public void move() {
 		y++;
 	}
 }

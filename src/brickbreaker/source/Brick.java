@@ -1,11 +1,9 @@
 package brickbreaker.source;
 
-class Brick extends GameObject
-{
+class Brick extends GameObject {
 	private boolean spider;
 
-	Brick(int x, int y, String img)
-	{
+	Brick(int x, int y, String img) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -13,13 +11,11 @@ class Brick extends GameObject
 		setSpider(false);
 	}
 
-	boolean isSpider()
-	{
+	boolean isSpider() {
 		return spider;
 	}
 
-	void setSpider(boolean spider)
-	{
+	void setSpider(boolean spider) {
 		this.spider = spider;
 	}
 }

@@ -1,13 +1,11 @@
 package brickbreaker.source;
 
-class Ball extends GameObject implements Commons
-{
+class Ball extends GameObject implements Commons {
 	private int xDir;
 	private int yDir;
 	private int speed;
 
-	Ball()
-	{
+	Ball() {
 		super();
 		x = BALL_X;
 		y = BALL_Y;
@@ -17,8 +15,7 @@ class Ball extends GameObject implements Commons
 		setImage(BALL);
 	}
 
-	Ball(int x, int y)
-	{
+	Ball(int x, int y) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -29,55 +26,45 @@ class Ball extends GameObject implements Commons
 	}
 
 	@Override
-	public void move()
-	{
+	public void move() {
 		x += xDir;
 		y += yDir;
 
-		if (x <= 0)
-		{
+		if (x <= 0) {
 			Sound.BOUNCE.play();
 			setXdir(speed);
 		}
-		if (x >= WIDTH - width)
-		{
+		if (x >= WIDTH - width) {
 			Sound.BOUNCE.play();
 			setXdir(-speed);
 		}
-		if (y <= 0)
-		{
+		if (y <= 0) {
 			Sound.BOUNCE.play();
 			setYdir(speed);
 		}
 	}
 
-	int getXdir()
-	{
+	int getXdir() {
 		return xDir;
 	}
 
-	void setXdir(int x)
-	{
+	void setXdir(int x) {
 		xDir = x;
 	}
 
-	int getYdir()
-	{
+	int getYdir() {
 		return yDir;
 	}
 
-	void setYdir(int y)
-	{
+	void setYdir(int y) {
 		yDir = y;
 	}
 
-	int getSpeed()
-	{
+	int getSpeed() {
 		return speed;
 	}
 
-	void setSpeed(int speed)
-	{
+	void setSpeed(int speed) {
 		this.speed = speed;
 	}
 }

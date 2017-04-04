@@ -1,7 +1,6 @@
 package brickbreaker.source;
 
-public interface Commons
-{
+public interface Commons {
 	int WALL = 38;
 	int WIDTH = 500;
 	int HEIGHT = 700;

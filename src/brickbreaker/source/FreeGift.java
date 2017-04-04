@@ -1,9 +1,7 @@
 package brickbreaker.source;
 
-class FreeGift extends GameObject implements Commons
-{
-	FreeGift()
-	{
+class FreeGift extends GameObject implements Commons {
+	FreeGift() {
 		super();
 		x = 240;
 		y = 5;
@@ -11,8 +9,7 @@ class FreeGift extends GameObject implements Commons
 	}
 
 	@Override
-	public void move()
-	{
+	public void move() {
 		y++;
 	}
 }

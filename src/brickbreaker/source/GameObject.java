@@ -5,8 +5,7 @@ import java.awt.Rectangle;
 import java.net.URL;
 import javax.swing.ImageIcon;
 
-abstract class GameObject
-{
+abstract class GameObject {
 	int x;
 	int y;
 	int width;
@@ -14,89 +13,76 @@ abstract class GameObject
 	Image image;
 	boolean destroyed;
 
-	GameObject()
-	{
+	GameObject() {
 		destroyed = false;
 	}
 
-	void setX(int x)
-	{
+	void setX(int x) {
 		this.x = x;
 	}
 
-	int getX()
-	{
+	int getX() {
 		return x;
 	}
 
-	void setY(int y)
-	{
+	void setY(int y) {
 		this.y = y;
 	}
 
-	int getY()
-	{
+	int getY() {
 		return y;
 	}
 
-	void setWidth(int width)
-	{
+	void setWidth(int width) {
 		this.width = width;
 	}
 
-	int getWidth()
-	{
+	int getWidth() {
 		return width;
 	}
 
-	void setHeight(int height)
-	{
+	void setHeight(int height) {
 		this.height = height;
 	}
 
-	int getHeight()
-	{
+	int getHeight() {
 		return height;
 	}
 
-	Rectangle getRect()
-	{
+	Rectangle getRect() {
 		return new Rectangle(x, y, width, height);
 	}
 
-	Rectangle getLeft()
-	{
+	Rectangle getLeft() {
 		return new Rectangle(x - 1, y, 1, height);
 	}
 
-	Rectangle getRight()
-	{
+	Rectangle getRight() {
 		return new Rectangle(x + width + 1, y, 1, height);
 	}
 
-	boolean isDestroyed()
-	{
+	boolean isDestroyed() {
 		return destroyed;
 	}
 
-	void setDestroyed(boolean destroyed)
-	{
+	void setDestroyed(boolean destroyed) {
 		this.destroyed = destroyed;
 	}
 
-	void setImage(String img)
-	{
+	void setImage(String img) {
 		ImageIcon ii = new ImageIcon(getURL(img));
 		image = ii.getImage();
 		width = image.getWidth(null);
 		height = image.getHeight(null);
 	}
 
-	URL getURL(String filename)
-	{
+	URL getURL(String filename) {
 		URL url = null;
-		try { url = this.getClass().getResource(filename); }
-		catch (Exception e) { e.printStackTrace(); }
+		try {
+			url = this.getClass().getResource(filename);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return url;
 	}
 }

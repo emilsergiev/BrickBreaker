@@ -10,8 +10,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 
-class Breakout extends JFrame
-{
+class Breakout extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JMenuItem menuItemStart;
@@ -25,16 +24,14 @@ class Breakout extends JFrame
 	private JRadioButtonMenuItem btnMute;
 	private Board board = new Board();
 
-	Breakout()
-	{
+	Breakout() {
 		initGUI();
 		setMenuBar();
 		createEvents();
 		Sound.init();
 	}
 
-	private void initGUI()
-	{
+	private void initGUI() {
 		setTitle("Wall Breaker - Breakout");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(Commons.WIDTH, Commons.HEIGHT);
@@ -44,10 +41,8 @@ class Breakout extends JFrame
 		add(board);
 	}
 
-	private void setMenuBar()
-	{
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource
-				("/brickbreaker/images/wall.png")));
+	private void setMenuBar() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/brickbreaker/images/wall.png")));
 
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menuGame = new JMenu("Game");
@@ -86,87 +81,68 @@ class Breakout extends JFrame
 		menuHelp.add(menuItemAbout);
 	}
 
-	private void createEvents()
-	{
-		menuItemStart.addActionListener(new ActionListener()
-		{
+	private void createEvents() {
+		menuItemStart.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				board.playGame();
 			}
 		});
 
-		menuItemPause.addActionListener(new ActionListener()
-		{
+		menuItemPause.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				board.pause();
 			}
 		});
 
-		menuItemResume.addActionListener(new ActionListener()
-		{
+		menuItemResume.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				board.resume();
 			}
 		});
 
-		menuItemLoad.addActionListener(new ActionListener()
-		{
+		menuItemLoad.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				//TODO load saved game...
+			public void actionPerformed(ActionEvent e) {
+				// TODO load saved game...
 			}
 		});
 
-		menuItemSave.addActionListener(new ActionListener()
-		{
+		menuItemSave.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				//TODO save the current game progress...
+			public void actionPerformed(ActionEvent e) {
+				// TODO save the current game progress...
 			}
 		});
 
-		menuItemExit.addActionListener(new ActionListener()
-		{
+		menuItemExit.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				//TODO ask for confirmation before exiting...
+			public void actionPerformed(ActionEvent e) {
+				// TODO ask for confirmation before exiting...
 			}
 		});
 
-		menuItemAbout.addActionListener(new ActionListener()
-		{
+		menuItemAbout.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				About about = new About();
 				about.setModal(true);
 				about.setVisible(true);
 			}
 		});
 
-		btnSound.addActionListener(new ActionListener()
-		{
+		btnSound.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				Sound.volume = 1;
 			}
 		});
 
-		btnMute.addActionListener(new ActionListener()
-		{
+		btnMute.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				Sound.volume = 0;
 			}
 		});

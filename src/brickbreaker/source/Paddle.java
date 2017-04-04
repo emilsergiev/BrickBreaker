@@ -2,12 +2,10 @@ package brickbreaker.source;
 
 import java.awt.event.KeyEvent;
 
-class Paddle extends GameObject implements Commons
-{
+class Paddle extends GameObject implements Commons {
 	private static int dx;
 
-	Paddle()
-	{
+	Paddle() {
 		super();
 		x = PADDLE_X;
 		y = PADDLE_Y;
@@ -15,43 +13,34 @@ class Paddle extends GameObject implements Commons
 	}
 
 	@Override
-	public void move()
-	{
+	public void move() {
 		x += dx;
 
-		if (x <= 0)
-		{
+		if (x <= 0) {
 			x = 0;
 		}
 
-		if (x >= WIDTH - width)
-		{
+		if (x >= WIDTH - width) {
 			x = WIDTH - width;
 		}
 	}
 
-	void keyPressed(KeyEvent e)
-	{
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
+	void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			dx = -PADDLE_SPEED;
 		}
 
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			dx = PADDLE_SPEED;
 		}
 	}
 
-	void keyReleased(KeyEvent e)
-	{
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
+	void keyReleased(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			dx = 0;
 		}
 
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			dx = 0;
 		}
 	}

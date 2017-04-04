@@ -13,20 +13,17 @@ import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 
-class About extends JDialog
-{
+class About extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		About dialog = new About();
 		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
 	}
 
-	About()
-	{
+	About() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(About.class.getResource("/brickbreaker/images/wall.png")));
 		setAlwaysOnTop(true);
 		setResizable(false);
@@ -46,7 +43,8 @@ class About extends JDialog
 		txtAbout.setBackground(SystemColor.menu);
 		txtAbout.setEditable(false);
 		contentPanel.add(txtAbout);
-		txtAbout.setText("\nAuthors: Emil Sergiev & Preslava Kuzova\n\nRelease Date: April 8, 2017\n\nVersion: 1.0a.brick.wall");
+		txtAbout.setText(
+				"\nAuthors: Emil Sergiev & Preslava Kuzova\n\nRelease Date: April 8, 2017\n\nVersion: 1.0a.brick.wall");
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setBackground(SystemColor.menu);
@@ -58,10 +56,8 @@ class About extends JDialog
 		buttonPane.add(okButton);
 		getRootPane().setDefaultButton(okButton);
 
-		okButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
+		okButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
