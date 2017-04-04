@@ -3,24 +3,37 @@ package brickbreaker.source;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButtonMenuItem;
 
 class Breakout extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private final ButtonGroup groupSound = new ButtonGroup();
+	private final ButtonGroup groupBackground = new ButtonGroup();
+	private final ButtonGroup groupSoundEffects = new ButtonGroup();
+	private Board board = new Board();
 	private JMenuItem menuItemStart;
 	private JMenuItem menuItemPause;
 	private JMenuItem menuItemResume;
 	private JMenuItem menuItemExit;
 	private JMenuItem menuItemAbout;
-	private JRadioButtonMenuItem btnSound;
-	private JRadioButtonMenuItem btnMute;
-	private Board board = new Board();
+	private JRadioButtonMenuItem btnSoundON;
+	private JRadioButtonMenuItem btnSoundOFF;
+	private JMenu backgroundMusic;
+	private JMenu soundEffects;
+	private JMenuItem bgLow;
+	private JMenuItem bgMed;
+	private JMenuItem bgHigh;
+	private JMenuItem seLow;
+	private JMenuItem seMed;
+	private JMenuItem seHigh;
 
 	Breakout() {
 		initGUI();
@@ -31,7 +44,7 @@ class Breakout extends JFrame {
 
 	private void initGUI() {
 		setTitle("Wall Breaker - Breakout");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setSize(Commons.WIDTH, Commons.HEIGHT);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -40,11 +53,12 @@ class Breakout extends JFrame {
 	}
 
 	private void setMenuBar() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/brickbreaker/images/wall.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource
+				("/brickbreaker/images/wall.png")));
 
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menuGame = new JMenu("Game");
-		JMenu menuSettings = new JMenu("Settings");
+		JMenu menuSound = new JMenu("Sound");
 		JMenu menuHelp = new JMenu("Help");
 
 		menuItemStart = new JMenuItem("Start");
@@ -52,16 +66,41 @@ class Breakout extends JFrame {
 		menuItemResume = new JMenuItem("Resume");
 		menuItemExit = new JMenuItem("Exit");
 		menuItemAbout = new JMenuItem("About");
-		btnSound = new JRadioButtonMenuItem("Sound ON");
-		btnMute = new JRadioButtonMenuItem("Sound OFF");
+		btnSoundON = new JRadioButtonMenuItem("Sound ON");
+		btnSoundOFF = new JRadioButtonMenuItem("Sound OFF");
+		backgroundMusic = new JMenu("Background");
+		bgLow = new JRadioButtonMenuItem("LOW");
+		bgMed = new JRadioButtonMenuItem("MEDUIM");
+		bgHigh = new JRadioButtonMenuItem("HIGH");
+		soundEffects = new JMenu("Sound Effects");
+		seLow = new JRadioButtonMenuItem("LOW");
+		seMed = new JRadioButtonMenuItem("MEDUIM");
+		seHigh = new JRadioButtonMenuItem("HIGH");
 
-		buttonGroup.add(btnSound);
-		buttonGroup.add(btnMute);
-		btnSound.setSelected(true);
+		backgroundMusic.add(bgLow);
+		backgroundMusic.add(bgMed);
+		backgroundMusic.add(bgHigh);
+		soundEffects.add(seLow);
+		soundEffects.add(seMed);
+		soundEffects.add(seHigh);
+
+		groupSound.add(btnSoundON);
+		groupSound.add(btnSoundOFF);
+		btnSoundON.setSelected(true);
+
+		groupBackground.add(bgLow);
+		groupBackground.add(bgMed);
+		groupBackground.add(bgHigh);
+		bgMed.setSelected(true);
+
+		groupSoundEffects.add(seLow);
+		groupSoundEffects.add(seMed);
+		groupSoundEffects.add(seHigh);
+		seMed.setSelected(true);
 
 		setJMenuBar(menuBar);
 		menuBar.add(menuGame);
-		menuBar.add(menuSettings);
+		menuBar.add(menuSound);
 		menuBar.add(menuHelp);
 
 		menuGame.add(menuItemStart);
@@ -69,8 +108,11 @@ class Breakout extends JFrame {
 		menuGame.add(menuItemResume);
 		menuGame.add(menuItemExit);
 
-		menuSettings.add(btnSound);
-		menuSettings.add(btnMute);
+		menuSound.add(btnSoundON);
+		menuSound.add(btnSoundOFF);
+		menuSound.addSeparator();
+		menuSound.add(backgroundMusic);
+		menuSound.add(soundEffects);
 
 		menuHelp.add(menuItemAbout);
 	}
@@ -80,6 +122,7 @@ class Breakout extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				board.playGame();
+				board.soundON();
 			}
 		});
 
@@ -100,7 +143,13 @@ class Breakout extends JFrame {
 		menuItemExit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				int prompt = JOptionPane.showOptionDialog(Breakout.this,
+						"Are you sure you want to exit?",
+						"Wall Breaker - Breakout", JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, null, null);
+				if (prompt == JOptionPane.YES_OPTION) {
+					System.exit(0); 
+				}
 			}
 		});
 
@@ -113,17 +162,72 @@ class Breakout extends JFrame {
 			}
 		});
 
-		btnSound.addActionListener(new ActionListener() {
+		btnSoundON.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Sound.volume = 1;
+				board.soundON();
 			}
 		});
 
-		btnMute.addActionListener(new ActionListener() {
+		btnSoundOFF.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				board.soundOFF();
+			}
+		});
+
+		bgLow.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Board.volume = -25;
+			}
+		});
+
+		bgMed.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Board.volume = -15;
+			}
+		});
+
+		bgHigh.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Board.volume = -5;
+			}
+		});
+
+		seLow.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Sound.volume = -10;
+			}
+		});
+
+		seMed.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Sound.volume = -5;
+			}
+		});
+
+		seHigh.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Sound.volume = 0;
+			}
+		});
+
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent we) {
+				int prompt = JOptionPane.showOptionDialog(Breakout.this,
+						"Are you sure you want to exit?",
+						"Wall Breaker - Breakout", JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, null, null);
+				if(prompt == JOptionPane.YES_OPTION) {
+					System.exit(0);
+				}
 			}
 		});
 	}
