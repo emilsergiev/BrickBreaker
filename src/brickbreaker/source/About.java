@@ -24,13 +24,14 @@ class About extends JDialog {
 	}
 
 	About() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(About.class.getResource("/brickbreaker/images/wall.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage
+				(About.class.getResource("/brickbreaker/images/wall.png")));
 		setAlwaysOnTop(true);
 		setResizable(false);
 		setBackground(SystemColor.windowBorder);
 		setTitle("Wall Breaker - About");
-		getContentPane().setFont(new Font("Dialog", Font.PLAIN, 17));
-		setSize(450, 200);
+		getContentPane().setFont(new Font("Verdana", Font.PLAIN, 17));
+		setSize(450, 270);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.menu);
@@ -43,9 +44,11 @@ class About extends JDialog {
 		txtAbout.setBackground(SystemColor.menu);
 		txtAbout.setEditable(false);
 		contentPanel.add(txtAbout);
-		txtAbout.setText(
-				"\nAuthors: Emil Sergiev & Preslava Kuzova\n\nRelease Date: April 8, 2017\n\nVersion: 1.0a.brick.wall");
-
+		txtAbout.setText("\nWall Breaker - Copyright © 2017 GNU GPL 3.0\n\n"
+				+ "Authors: Emil Sergiev & Preslava Kuzova\n\n"
+				+ "Music: by Jay Man - http://ourmusicbox.com\n\n"
+				+ "Release Date: April 8, 2017\n\n"
+				+ "Version: 1.0a.brick.wall");
 		JPanel buttonPane = new JPanel();
 		buttonPane.setBackground(SystemColor.menu);
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
