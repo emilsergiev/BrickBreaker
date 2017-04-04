@@ -1,4 +1,4 @@
-# BrickBreaker (Wall Breaker)
+# BrickBreaker (Wall Breaker - Breakout)
 
 A group school project in progress...
 
@@ -6,7 +6,7 @@ A group school project in progress...
 
 We will use a timer task to create the game cycle.
 
-**The game will have 12 java files:**
+**The game will have 13 java files:**
 
 - **Main.java** - *is the class that holds the main method and starts our game.*
 
@@ -80,6 +80,8 @@ We will use a timer task to create the game cycle.
 
     -  **Runs the timer tasks** -- update and repaint.
 
-- **Commons.java** - *is our interface file that will hold the game constants.*
+- **Commons.java** - *is the interface file that will declare game constants and common methods.*
+
+- **Sound.java** - *is the enum file that will load and play sound effects*
 
 - **About.java** - *the about window*
