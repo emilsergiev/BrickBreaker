@@ -5,8 +5,8 @@ public class Ball extends GameObject {
 	private int speedY;
 
 	public Ball() {
-		this.speedX = 2;
-		this.speedY = 2;
+		this.speedX = Commons.BALL_SPEED;
+		this.speedY = Commons.BALL_SPEED;
 		this.width = 15;
 		this.height = 15;
 		this.x = Commons.BALL_X;

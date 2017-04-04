@@ -1,14 +1,12 @@
 package brickbreaker.classes;
 
-public interface Commons
-{
-<<<<<<< HEAD
+public interface Commons {
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 700;
 	public static final int BALL_X = 250;
 	public static final int BALL_Y = 350;
-	//TODO add the common constants here...
-=======
+	// TODO add the common constants here...
+
 	final int WALL = 38;
 	final int WIDTH = 500;
 	final int HEIGHT = 700;
@@ -23,5 +21,4 @@ public interface Commons
 	final int BALL_SPEED = 2;
 	final int DELAY = 1000;
 	final int PERIOD = 10;
->>>>>>> 03251e484697a91a9fb5d05b7c6e99f1bc3e3a55
 }
