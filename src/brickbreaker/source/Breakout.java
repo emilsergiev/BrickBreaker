@@ -16,8 +16,6 @@ class Breakout extends JFrame {
 	private JMenuItem menuItemStart;
 	private JMenuItem menuItemPause;
 	private JMenuItem menuItemResume;
-	private JMenuItem menuItemLoad;
-	private JMenuItem menuItemSave;
 	private JMenuItem menuItemExit;
 	private JMenuItem menuItemAbout;
 	private JRadioButtonMenuItem btnSound;
