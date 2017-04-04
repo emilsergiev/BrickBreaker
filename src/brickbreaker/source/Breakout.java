@@ -52,8 +52,6 @@ class Breakout extends JFrame {
 		menuItemStart = new JMenuItem("Start");
 		menuItemPause = new JMenuItem("Pause");
 		menuItemResume = new JMenuItem("Resume");
-		menuItemLoad = new JMenuItem("Load");
-		menuItemSave = new JMenuItem("Save");
 		menuItemExit = new JMenuItem("Exit");
 		menuItemAbout = new JMenuItem("About");
 		btnSound = new JRadioButtonMenuItem("Sound ON");
@@ -71,8 +69,6 @@ class Breakout extends JFrame {
 		menuGame.add(menuItemStart);
 		menuGame.add(menuItemPause);
 		menuGame.add(menuItemResume);
-		menuGame.add(menuItemLoad);
-		menuGame.add(menuItemSave);
 		menuGame.add(menuItemExit);
 
 		menuSettings.add(btnSound);
@@ -103,24 +99,10 @@ class Breakout extends JFrame {
 			}
 		});
 
-		menuItemLoad.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO load saved game...
-			}
-		});
-
-		menuItemSave.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO save the current game progress...
-			}
-		});
-
 		menuItemExit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO ask for confirmation before exiting...
+				System.exit(0);
 			}
 		});
 
