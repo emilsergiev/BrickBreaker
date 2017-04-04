@@ -8,9 +8,18 @@ import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JPanel;
 
 class Board extends JPanel implements Commons {
@@ -29,6 +38,9 @@ class Board extends JPanel implements Commons {
 	private ArrayList<Spider> spiders = new ArrayList<Spider>();
 	private String message = "Press <ENTER> to play";
 	private FreeGift gift;
+	private Clip clip;
+	static int volume = -15;
+	private FloatControl gainControl;
 
 	Board() {
 		setFocusable(true);
@@ -44,6 +56,7 @@ class Board extends JPanel implements Commons {
 			paddle = new Paddle();
 			balls.add(new Ball());
 			play = true;
+			soundON();
 		}
 	}
 
@@ -99,7 +112,7 @@ class Board extends JPanel implements Commons {
 	}
 
 	private void drawObjects(Graphics2D g2d) {
-		g2d.setColor(Color.WHITE);
+		g2d.setColor(Color.CYAN);
 		g2d.setFont(new Font("Verdana", Font.BOLD, 17));
 		g2d.drawString("Level: " + level, 5, 20);
 		g2d.drawString("Score: " + score, 350, 20);
@@ -297,6 +310,7 @@ class Board extends JPanel implements Commons {
 		if (play) {
 			timer.cancel();
 			paused = true;
+			soundOFF();
 		}
 	}
 
@@ -304,6 +318,7 @@ class Board extends JPanel implements Commons {
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new Animate(this), DELAY, PERIOD);
 		paused = false;
+		soundON();
 	}
 
 	private void endGame() {
@@ -318,9 +333,55 @@ class Board extends JPanel implements Commons {
 		message = "Game Over! score: " + highScore;
 		timer.cancel();
 		timer.purge();
+		soundOFF();
 	}
 
 	@Override
 	public void move() {
+	}
+
+	void soundON() {
+		Sound.sound = true;
+		if (clip == null)
+		{
+			try {
+				AudioInputStream ais = AudioSystem.getAudioInputStream
+						(getLocation("/brickbreaker/sounds/la_cucaracha.au"));
+				clip = AudioSystem.getClip();
+				clip.open(ais);
+				gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+				gainControl.setValue(volume);
+				clip.loop(Clip.LOOP_CONTINUOUSLY);
+			}
+			catch (UnsupportedAudioFileException e) {
+				e.printStackTrace();
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			catch (LineUnavailableException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	void soundOFF() {
+		Sound.sound = false;
+		if (clip != null)
+		{
+			clip.stop();
+			clip = null;
+		}
+	}
+
+	private URL getLocation(String filename) {
+		URL url = null;
+		try {
+			url = this.getClass().getResource(filename);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return url;
 	}
 }
