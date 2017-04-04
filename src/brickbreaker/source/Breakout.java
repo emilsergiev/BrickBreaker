@@ -1,4 +1,4 @@
-package brickbreaker.classes;
+package brickbreaker.source;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -10,7 +10,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 
-public class Breakout extends JFrame
+class Breakout extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -30,6 +30,7 @@ public class Breakout extends JFrame
 		initGUI();
 		setMenuBar();
 		createEvents();
+		Sound.init();
 	}
 
 	private void initGUI()
@@ -46,7 +47,7 @@ public class Breakout extends JFrame
 	private void setMenuBar()
 	{
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource
-				("/brickbreaker/resources/wall.png")));
+				("/brickbreaker/images/wall.png")));
 
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menuGame = new JMenu("Game");
@@ -157,7 +158,7 @@ public class Breakout extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				//TODO turn ON sound...
+				Sound.volume = 1;
 			}
 		});
 
@@ -166,7 +167,7 @@ public class Breakout extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				//TODO turn OFF sound...
+				Sound.volume = 0;
 			}
 		});
 	}

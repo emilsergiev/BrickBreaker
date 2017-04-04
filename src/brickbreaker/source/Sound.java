@@ -1,4 +1,4 @@
-package brickbreaker.classes;
+package brickbreaker.source;
 
 import java.net.URL;
 import java.io.IOException;

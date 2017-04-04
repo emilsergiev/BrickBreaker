@@ -1,4 +1,4 @@
-package brickbreaker.classes;
+package brickbreaker.source;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 
-public class About extends JDialog
+class About extends JDialog
 {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -27,7 +27,7 @@ public class About extends JDialog
 
 	About()
 	{
-		setIconImage(Toolkit.getDefaultToolkit().getImage(About.class.getResource("/brickbreaker/resources/wall.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(About.class.getResource("/brickbreaker/images/wall.png")));
 		setAlwaysOnTop(true);
 		setResizable(false);
 		setBackground(SystemColor.windowBorder);

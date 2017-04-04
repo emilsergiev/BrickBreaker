@@ -1,4 +1,4 @@
-package brickbreaker.classes;
+package brickbreaker.source;
 
 import java.awt.EventQueue;
 

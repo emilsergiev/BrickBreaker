@@ -1,4 +1,4 @@
-package brickbreaker.classes;
+package brickbreaker.source;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -55,34 +55,34 @@ class Board extends JPanel implements Commons
 	{
 		for (int i = 0; i < 8; i++)
 		{
-			bricks.add(new Brick((i * 60 + 7), 50, "/brickbreaker/resources/brick.png"));
+			bricks.add(new Brick((i * 60 + 7), 50, BRICK));
 		}
 		for (int i = 0; i < 7; i++)
 		{
-			bricks.add(new Brick((i * 60 + 37), 75, "/brickbreaker/resources/brick.png"));
+			bricks.add(new Brick((i * 60 + 37), 75, BRICK));
 		}
 		for (int i = 0; i < 8; i++)
 		{
-			bricks.add(new Brick((i * 60 + 7), 100, "/brickbreaker/resources/brick.png"));
+			bricks.add(new Brick((i * 60 + 7), 100, BRICK));
 		}
 		for (int i = 0; i < 7; i++)
 		{
-			bricks.add(new Brick((i * 60 + 37), 125, "/brickbreaker/resources/brick.png"));
+			bricks.add(new Brick((i * 60 + 37), 125, BRICK));
 		}
 		for (int i = 0; i < 8; i++)
 		{
-			bricks.add(new Brick((i * 60 + 7), 150, "/brickbreaker/resources/brick.png"));
+			bricks.add(new Brick((i * 60 + 7), 150, BRICK));
 		}
 		for (int i = 0; i < 6; i++)
 		{
-			bricks.get(random.nextInt(WALL)).setPowerup(true);
+			bricks.get(random.nextInt(WALL)).setSpider(true);
 		}
 
 		for (Brick b : bricks)
 		{
-			if (b.isPowerup())
+			if (b.isSpider())
 			{
-				b.setImage("/brickbreaker/resources/brick-spider.png");
+				b.setImage(BRICK_SPIDER);
 			}
 		}
 	}
@@ -180,9 +180,11 @@ class Board extends JPanel implements Commons
 				if (ball.getSpeed() >= 3)
 				{
 					ball.setSpeed(BALL_SPEED);
+					ball.setImage(BALL);
 				}
 				else if (paddle.width <= 50)
 				{
+					Sound.SIZEUP.play();
 					paddle.setWidth(75);
 				}
 				else
@@ -213,7 +215,8 @@ class Board extends JPanel implements Commons
 		}
 	}
 
-	private void giveFreeGift() {
+	private void giveFreeGift()
+	{
 		if (gift == null)
 		{
 			gift = new FreeGift();
@@ -231,17 +234,20 @@ class Board extends JPanel implements Commons
 			if (spider.getRect().intersects(paddle.getRect()) && !spider.isDestroyed())
 			{
 				spider.setDestroyed(true);
-				if (spider.isExtra())
+				if (spider.isExtraBall())
 				{
+					Sound.BOING.play();
 					balls.add(new Ball(spider.getX(), spider.getY()));
 				}
 				else if (paddle.width < 125)
 				{
+					Sound.SIZEUP.play();
 					paddle.setWidth(paddle.width + 25);
 					ingame--;
 				}
 				else
 				{
+					Sound.BOING.play();
 					balls.add(new Ball(spider.getX(), spider.getY()));
 				}
 			}
@@ -250,6 +256,7 @@ class Board extends JPanel implements Commons
 				ingame--;
 				spider.setDestroyed(true);
 				if (paddle.width > 25){
+					Sound.SIZEDOWN.play();
 					paddle.setWidth(paddle.width - 25);
 				}
 			}
@@ -265,12 +272,15 @@ class Board extends JPanel implements Commons
 				ball.setDestroyed(true);
 				ingame--;
 				if (paddle.width > 25){
+					Sound.SIZEDOWN.play();
 					paddle.setWidth(paddle.width - 25);
 				}
 			}
 			if (ball.getRect().intersects(paddle.getRect()))
 			{
+				Sound.BOING.play();
 				ball.setYdir(ball.getYdir() * -1);
+				ball.setY(BALL_Y);
 			}
 			for (Brick brick : bricks)
 			{
@@ -278,32 +288,38 @@ class Board extends JPanel implements Commons
 						&& !brick.isDestroyed())
 				{
 					ball.setXdir(ball.getXdir() * -1);
+					ball.move();
 					score++;
-					if (brick.isPowerup())
+					if (brick.isSpider())
 					{
-						brick.setImage("/brickbreaker/resources/brick.png");
-						brick.setPowerup(false);
+						Sound.BOUNCE.play();
+						brick.setImage(BRICK);
+						brick.setSpider(false);
 						spiders.add(new Spider(brick.x, brick.y, getRandomBoolean()));
 						ingame++;
 					}
 					else
 					{
+						Sound.BREAK.play();
 						brick.setDestroyed(true);
 					}
 				}
 				else if (ball.getRect().intersects(brick.getRect()) && !brick.isDestroyed())
 				{
 					ball.setYdir(ball.getYdir() * -1);
+					ball.move();
 					score++;
-					if (brick.isPowerup())
+					if (brick.isSpider())
 					{
-						brick.setImage("/brickbreaker/resources/brick.png");
-						brick.setPowerup(false);
+						Sound.BOUNCE.play();
+						brick.setImage(BRICK);
+						brick.setSpider(false);
 						spiders.add(new Spider(brick.x, brick.y, getRandomBoolean()));
 						ingame++;
 					}
 					else
 					{
+						Sound.BREAK.play();
 						brick.setDestroyed(true);
 					}
 				}
@@ -377,4 +393,7 @@ class Board extends JPanel implements Commons
 		timer.cancel();
 		timer.purge();
 	}
+
+	@Override
+	public void move() {}
 }

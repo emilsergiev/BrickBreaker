@@ -1,4 +1,4 @@
-package brickbreaker.classes;
+package brickbreaker.source;
 
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -24,11 +24,7 @@ abstract class GameObject
 		this.x = x;
 	}
 
-<<<<<<< HEAD
-	public int getX()
-=======
 	int getX()
->>>>>>> 03251e484697a91a9fb5d05b7c6e99f1bc3e3a55
 	{
 		return x;
 	}
@@ -38,11 +34,7 @@ abstract class GameObject
 		this.y = y;
 	}
 
-<<<<<<< HEAD
-	public int getY()
-=======
 	int getY()
->>>>>>> 03251e484697a91a9fb5d05b7c6e99f1bc3e3a55
 	{
 		return y;
 	}
