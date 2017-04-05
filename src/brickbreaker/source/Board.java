@@ -39,8 +39,8 @@ class Board extends JPanel implements Commons {
 	private String message = "Press <ENTER> to play";
 	private FreeGift gift;
 	private Clip clip;
-	static int volume = -15;
 	private FloatControl gainControl;
+	protected int volume = -15; // Reduce volume sound by 15 dB.
 
 	Board() {
 		setFocusable(true);
@@ -163,7 +163,7 @@ class Board extends JPanel implements Commons {
 				if (ball.getSpeed() >= 3) {
 					ball.setSpeed(BALL_SPEED);
 					ball.setImage(BALL);
-				} else if (paddle.width <= 50) {
+				} else if (paddle.width < 75) {
 					Sound.SIZEUP.play();
 					paddle.setWidth(75);
 				} else {
@@ -310,7 +310,6 @@ class Board extends JPanel implements Commons {
 		if (play) {
 			timer.cancel();
 			paused = true;
-			soundOFF();
 		}
 	}
 
@@ -318,7 +317,6 @@ class Board extends JPanel implements Commons {
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new Animate(this), DELAY, PERIOD);
 		paused = false;
-		soundON();
 	}
 
 	private void endGame() {
@@ -334,11 +332,11 @@ class Board extends JPanel implements Commons {
 		timer.cancel();
 		timer.purge();
 		soundOFF();
+		clip = null;
 	}
 
 	@Override
-	public void move() {
-	}
+	public void move() {}
 
 	void soundON() {
 		Sound.sound = true;
@@ -346,20 +344,17 @@ class Board extends JPanel implements Commons {
 		{
 			try {
 				AudioInputStream ais = AudioSystem.getAudioInputStream
-						(getLocation("/brickbreaker/sounds/la_cucaracha.au"));
+						(getLocation("/brickbreaker/sounds/bensound-jazzyfrenchy.au"));
 				clip = AudioSystem.getClip();
 				clip.open(ais);
 				gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 				gainControl.setValue(volume);
 				clip.loop(Clip.LOOP_CONTINUOUSLY);
-			}
-			catch (UnsupportedAudioFileException e) {
+			} catch (UnsupportedAudioFileException e) {
 				e.printStackTrace();
-			}
-			catch (IOException e) {
+			} catch (IOException e) {
 				e.printStackTrace();
-			}
-			catch (LineUnavailableException e) {
+			} catch (LineUnavailableException e) {
 				e.printStackTrace();
 			}
 		}
@@ -367,8 +362,7 @@ class Board extends JPanel implements Commons {
 
 	void soundOFF() {
 		Sound.sound = false;
-		if (clip != null)
-		{
+		if (clip != null) {
 			clip.stop();
 			clip = null;
 		}
@@ -378,8 +372,7 @@ class Board extends JPanel implements Commons {
 		URL url = null;
 		try {
 			url = this.getClass().getResource(filename);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return url;
