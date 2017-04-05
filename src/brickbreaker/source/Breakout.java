@@ -68,7 +68,7 @@ class Breakout extends JFrame {
 		menuItemAbout = new JMenuItem("About");
 		btnSoundON = new JRadioButtonMenuItem("Sound ON");
 		btnSoundOFF = new JRadioButtonMenuItem("Sound OFF");
-		backgroundMusic = new JMenu("Background");
+		backgroundMusic = new JMenu("Background Music");
 		bgLow = new JRadioButtonMenuItem("LOW");
 		bgMed = new JRadioButtonMenuItem("MEDUIM");
 		bgHigh = new JRadioButtonMenuItem("HIGH");
@@ -111,8 +111,8 @@ class Breakout extends JFrame {
 		menuSound.add(btnSoundON);
 		menuSound.add(btnSoundOFF);
 		menuSound.addSeparator();
-		menuSound.add(backgroundMusic);
 		menuSound.add(soundEffects);
+		menuSound.add(backgroundMusic);
 
 		menuHelp.add(menuItemAbout);
 	}
@@ -145,7 +145,7 @@ class Breakout extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int prompt = JOptionPane.showOptionDialog(Breakout.this,
 						"Are you sure you want to exit?",
-						"Wall Breaker - Breakout", JOptionPane.YES_NO_OPTION,
+						"Wall Breaker", JOptionPane.YES_NO_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, null, null);
 				if (prompt == JOptionPane.YES_OPTION) {
 					System.exit(0); 
@@ -179,21 +179,27 @@ class Breakout extends JFrame {
 		bgLow.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Board.volume = -25;
+				board.volume = -25;
+				board.soundOFF();
+				board.soundON();
 			}
 		});
 
 		bgMed.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Board.volume = -15;
+				board.volume = -15;
+				board.soundOFF();
+				board.soundON();
 			}
 		});
 
 		bgHigh.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Board.volume = -5;
+				board.volume = -5;
+				board.soundOFF();
+				board.soundON();
 			}
 		});
 
@@ -223,7 +229,7 @@ class Breakout extends JFrame {
 			public void windowClosing(WindowEvent we) {
 				int prompt = JOptionPane.showOptionDialog(Breakout.this,
 						"Are you sure you want to exit?",
-						"Wall Breaker - Breakout", JOptionPane.YES_NO_OPTION,
+						"Wall Breaker", JOptionPane.YES_NO_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, null, null);
 				if(prompt == JOptionPane.YES_OPTION) {
 					System.exit(0);
