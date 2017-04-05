@@ -40,13 +40,13 @@ class About extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 
 		JTextArea txtAbout = new JTextArea();
-		txtAbout.setFont(new Font("Dialog", Font.PLAIN, 17));
+		txtAbout.setFont(new Font("Verdana", Font.PLAIN, 17));
 		txtAbout.setBackground(SystemColor.menu);
 		txtAbout.setEditable(false);
 		contentPanel.add(txtAbout);
 		txtAbout.setText("\nWall Breaker - Copyright © 2017 GNU GPL 3.0\n\n"
 				+ "Authors: Emil Sergiev & Preslava Kuzova\n\n"
-				+ "Music: by Jay Man - http://ourmusicbox.com\n\n"
+				+ "Music: by Bensound - www.bensound.com\n\n"
 				+ "Release Date: April 8, 2017\n\n"
 				+ "Version: 1.0a.brick.wall");
 		JPanel buttonPane = new JPanel();
